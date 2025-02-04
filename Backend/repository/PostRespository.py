@@ -11,3 +11,6 @@ def save_post(post: Post, db: Session) -> Post:
 
 def fetch_posts(db: Session):
     return db.query(Post).all()
+
+def fetch_post(post_id: int, db: Session):
+    return db.query(Post).filter(Post.id == post_id).first()

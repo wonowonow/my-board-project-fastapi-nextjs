@@ -15,3 +15,7 @@ def create_post(request: PostCreateDto, db: Session = Depends(get_db)):
 @router.get("/posts", response_model=List[PostDto])
 def get_posts(db: Session = Depends(get_db)):
     return PostService.get_posts(db)
+
+@router.get("/posts/{post_id}", response_model=PostDto)
+def get_post(post_id: int, db: Session = Depends(get_db)):
+    return PostService.get_post(post_id, db)
