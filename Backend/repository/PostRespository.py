@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from Backend.Model import Post
+from Backend.Model.Post import Post
 
 def save_post(post: Post, db: Session) -> Post:
     db.add(post)  # DB에 추가
@@ -8,3 +8,6 @@ def save_post(post: Post, db: Session) -> Post:
 
     # 엔티티 반환
     return post
+
+def fetch_posts(db: Session):
+    return db.query(Post).all()
