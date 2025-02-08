@@ -1,15 +1,17 @@
 # Node.js 베이스 이미지
-FROM node:18
+FROM node:20
 
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 패키지 파일 복사 후 종속성 설치
-COPY Frontend/package.json Frontend/package-lock.json ./
+# package.json & package-lock.json 복사
+COPY package.json package-lock.json ./
+
+# 패키지 설치
 RUN npm install
 
 # 소스 코드 복사
-COPY Frontend /app
+COPY . .
 
 # Next.js 빌드
 RUN npm run build
