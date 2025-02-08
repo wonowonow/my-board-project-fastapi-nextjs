@@ -8,7 +8,7 @@ type Post = {
 }
 
 export async function getServerSideProps() {
-    const res = await fetch('http://localhost:8000/posts');
+    const res = await fetch('http://backend:8000/posts');
     const posts: Post[] = await res.json();
     
     return {

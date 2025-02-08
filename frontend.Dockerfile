@@ -1,20 +1,23 @@
-# Node.js 베이스 이미지
-FROM node:20
+# 기존 Node.js 이미지 사용
+FROM node:20 
 
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# package.json & package-lock.json 복사
-COPY package.json package-lock.json ./
+# pnpm 설치 (추가)
+RUN npm install -g pnpm
 
-# 패키지 설치
+# 패키지 복사 및 설치
+COPY Frontend/package.json Frontend/package-lock.json ./
 RUN npm install
 
-# 소스 코드 복사
-COPY . .
+# 불필요한 node_modules 삭제
+RUN rm -rf node_modules
 
-# Next.js 빌드
+# 프로젝트 코드 복사
+COPY Frontend/ .
+
+# 빌드 실행
 RUN npm run build
 
-# Next.js 실행
 CMD ["npm", "run", "start"]
